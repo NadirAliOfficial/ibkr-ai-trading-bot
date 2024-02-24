@@ -12,4 +12,3 @@ A Python-based trading bot that connects directly to Interactive Brokers (IBKR) 
 - **OpenAI Integration (Optional):** AI-driven signal evaluation and dynamic filter adjustment
 <!-- updated: 2023-04-29 -->
 
-
