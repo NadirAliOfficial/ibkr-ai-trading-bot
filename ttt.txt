@@ -1,0 +1,4037 @@
+//+------------------------------------------------------------------+
+//|                                     V20_Trade_Protection_MT5.mq5 |
+//|                                  Copyright 2024, MQL Development |
+//|                                  https://www.mqldevelopment.com/ |
+//+------------------------------------------------------------------+
+
+#property copyright "Copyright 2024, MQL Development"
+#property link      "https://www.mqldevelopment.com/"
+#property version   "1.00"
+
+#property description "Control Panels and Dialogs. Demonstration class CLabel"
+#include  <Controls\Dialog.mqh>
+#include  <Controls\Label.mqh>
+#include  <Controls\Button.mqh>
+#include  <Controls\RadioButton.mqh>
+#include  <Controls\RadioGroup.mqh>
+#include  <Controls\CheckBox.mqh>
+#include  <Controls\ComboBox.mqh>
+
+#include <Trade\Trade.mqh>
+CTrade   trade;
+
+input  string    DashboardSettings     = " ------------- Dashboard Settings ------------- ";//_
+input  int       dashHeight            = 350;                  // Enter Height of Dashboard
+input  int       dashWidth             = 550;                  // Enter Width  of Dashboard
+input  int       fontSize              = 9;                   // Font Size
+
+color     colorshade     = C'188,133,43'; // Secondary Color
+color     dashBoardBack  = clrWhiteSmoke; // DashBoard Background color
+color     textColor      = clrBlack;      // Text Color
+
+//+------------------------------------------------------------------+
+//| Expert initialization function                                   |
+//+------------------------------------------------------------------+
+int OnInit()
+  {
+
+
+
+   trade.SetExpertMagicNumber(123);
+   trade.SetDeviationInPoints(10);
+   trade.SetTypeFilling(ORDER_FILLING_IOC);
+   trade.LogLevel(LOG_LEVEL_ALL);
+   trade.SetAsyncMode(false);
+
+   if(!ExtDialog.Create(0,"Trade Panel Management",10,10,40,dashWidth,dashHeight))      // the panel position
+      return(INIT_FAILED);
+
+   ExtDialog.Run();
+
+   EventSetMillisecondTimer(1000);
+
+//---
+   return(INIT_SUCCEEDED);
+  }
+//+------------------------------------------------------------------+
+//| Expert deinitialization function                                 |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+  {
+//---
+
+   ExtDialog.Destroy(reason);
+   EventKillTimer();
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnTick()
+  {
+
+  }
+
+//+------------------------------------------------------------------+
+//| Expert tick function                                             |
+//+------------------------------------------------------------------+
+void OnTimer()
+  {
+
+
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+class CControlsDialog : public CAppDialog
+  {
+public:
+
+   CLabel            m_label0;
+   CLabel            m_label1;
+   CLabel            m_label2;
+   CLabel            m_label3;
+   CLabel            m_label4;
+   CLabel            m_label5;
+   CLabel            m_label6;
+   CLabel            m_label7;
+   CLabel            m_label8;
+   CLabel            m_label9;
+   CLabel            m_label10;
+   CLabel            m_label11;
+   CLabel            m_label12;
+   CLabel            m_label13;
+   CLabel            m_label14;
+   CLabel            m_label15;
+   CLabel            m_label16;
+
+
+   CButton           m_button1;
+   CButton           m_button2;
+   CButton           m_button3;
+   CButton           m_button4;
+   CButton           m_button5;
+   CButton           m_button6;
+   CButton           m_button7;
+   CButton           m_button8;
+   CButton           m_button9;
+   CButton           m_button10;
+   CButton           m_button11;
+   CButton           m_button12;
+   CButton           m_button13;
+   CButton           m_button14;
+   CButton           m_button15;
+   CButton           m_button16;
+   CButton           m_button17;
+   CButton           m_button18;
+   CButton           m_button19;
+   CButton           m_button20;
+   CButton           m_button21;
+   CButton           m_button22;
+   CButton           m_button23;
+   CButton           m_button24;
+   CButton           m_button25;
+   CButton           m_button26;
+   CButton           m_button27;
+   CButton           m_button28;
+   CButton           m_button29;
+   CButton           m_button30;
+   CButton           m_button31;
+   CButton           m_button32;
+   CButton           m_button33;
+   CButton           m_button34;
+   CButton           m_button35;
+   CButton           m_button36;
+   CButton           m_button37;
+   CButton           m_button38;
+   CButton           m_button39;
+   CButton           m_button40;
+   CButton           m_button41;
+   CButton           m_button42;
+   CButton           m_button43;
+   CButton           m_button44;
+   CButton           m_button45;
+   CButton           m_button46;
+   CButton           m_button47;
+   CButton           m_button48;
+   CButton           m_button49;
+   CButton           m_button50;
+   CButton           m_button51;
+
+   CEdit             m_edit;
+   CEdit             m_edit1;
+   CEdit             m_edit2;
+   CEdit             m_edit3;
+   CEdit             m_edit4;
+   CEdit             m_edit5;
+   CEdit             m_edit6;
+   CEdit             m_edit7;
+   CEdit             m_edit8;
+   CEdit             m_edit9;
+   CEdit             m_edit10;
+   CEdit             m_edit11;
+   CEdit             m_edit12;
+   CEdit             m_edit13;
+   CEdit             m_edit14;
+   CEdit             m_edit15;
+   CEdit             m_edit16;
+   CEdit             m_edit17;
+   CEdit             m_edit18;
+
+
+                     CControlsDialog(void);
+                    ~CControlsDialog(void);
+   //--- create
+   virtual bool      Create(const long chart,const string name,const int subwin,const int x1,const int y1,const int x2,const int y2);
+   virtual bool      OnEvent(const int id, const long &lparam,const double &dparam, const string &sparam);
+
+   void              ColorBackground(const color clr);
+   void              ColorCaption(const color clr);
+   void              ColorBorder(const color clr);
+
+   //--- create dependent controls
+   bool              CreateButton1(void);
+   void              OnClickButton1(void);
+
+   bool              CreateButton2(void);
+   void              OnClickButton2(void);
+
+   bool              CreateButton3(void);
+   void              OnClickButton3(void);
+
+   bool              CreateButton4(void);
+   void              OnClickButton4(void);
+
+   bool              CreateButton5(void);
+   void              OnClickButton5(void);
+
+   bool              CreateButton6(void);
+   void              OnClickButton6(void);
+
+   bool              CreateButton7(void);
+   void              OnClickButton7(void);
+
+   bool              CreateButton8(void);
+   void              OnClickButton8(void);
+
+   bool              CreateButton9(void);
+   void              OnClickButton9(void);
+
+   bool              CreateButton10(void);
+   void              OnClickButton10(void);
+
+   bool              CreateButton11(void);
+   void              OnClickButton11(void);
+
+   bool              CreateButton12(void);
+   void              OnClickButton12(void);
+
+   bool              CreateButton13(void);
+   void              OnClickButton13(void);
+
+   bool              CreateButton14(void);
+   void              OnClickButton14(void);
+
+   bool              CreateButton15(void);
+   void              OnClickButton15(void);
+
+   bool              CreateButton16(void);
+   void              OnClickButton16(void);
+
+   bool              CreateButton17(void);
+   void              OnClickButton17(void);
+
+   bool              CreateButton18(void);
+   void              OnClickButton18(void);
+
+   bool              CreateButton19(void);
+   void              OnClickButton19(void);
+
+   bool              CreateButton20(void);
+   void              OnClickButton20(void);
+
+   bool              CreateButton21(void);
+   void              OnClickButton21(void);
+
+   bool              CreateButton22(void);
+   void              OnClickButton22(void);
+
+   bool              CreateButton23(void);
+   void              OnClickButton23(void);
+
+   bool              CreateButton24(void);
+   void              OnClickButton24(void);
+
+   bool              CreateButton25(void);
+   void              OnClickButton25(void);
+
+   bool              CreateButton26(void);
+   void              OnClickButton26(void);
+
+   bool              CreateButton27(void);
+   void              OnClickButton27(void);
+
+   bool              CreateButton28(void);
+   void              OnClickButton28(void);
+
+   bool              CreateButton29(void);
+   void              OnClickButton29(void);
+
+   bool              CreateButton30(void);
+   void              OnClickButton30(void);
+
+   bool              CreateButton31(void);
+   void              OnClickButton31(void);
+
+   bool              CreateButton32(void);
+   void              OnClickButton32(void);
+
+   bool              CreateButton33(void);
+   void              OnClickButton33(void);
+
+   bool              CreateButton34(void);
+   void              OnClickButton34(void);
+
+   bool              CreateButton35(void);
+   void              OnClickButton35(void);
+
+   bool              CreateButton36(void);
+   void              OnClickButton36(void);
+
+   bool              CreateButton37(void);
+   void              OnClickButton37(void);
+
+   bool              CreateButton38(void);
+   void              OnClickButton38(void);
+
+   bool              CreateButton39(void);
+   void              OnClickButton39(void);
+
+   bool              CreateButton40(void);
+   void              OnClickButton40(void);
+
+   bool              CreateButton41(void);
+   void              OnClickButton41(void);
+
+   bool              CreateButton42(void);
+   void              OnClickButton42(void);
+
+   bool              CreateButton43(void);
+   void              OnClickButton43(void);
+
+   bool              CreateButton44(void);
+   void              OnClickButton44(void);
+
+   bool              CreateButton45(void);
+   void              OnClickButton45(void);
+
+   bool              CreateButton46(void);
+   void              OnClickButton46(void);
+
+   bool              CreateButton47(void);
+   void              OnClickButton47(void);
+
+   bool              CreateButton48(void);
+   void              OnClickButton48(void);
+
+   bool              CreateButton49(void);
+   void              OnClickButton49(void);
+
+   bool              CreateButton50(void);
+   void              OnClickButton50(void);
+
+   bool              CreateButton51(void);
+   void              OnClickButton51(void);
+
+   bool              CreateEdit(void);
+   bool              CreateEdit1(void);
+   bool              CreateEdit2(void);
+   bool              CreateEdit3(void);
+   bool              CreateEdit4(void);
+   bool              CreateEdit5(void);
+   bool              CreateEdit6(void);
+   bool              CreateEdit7(void);
+   bool              CreateEdit8(void);
+   bool              CreateEdit9(void);
+   bool              CreateEdit10(void);
+   bool              CreateEdit11(void);
+   bool              CreateEdit12(void);
+   bool              CreateEdit13(void);
+   bool              CreateEdit14(void);
+   bool              CreateEdit15(void);
+   bool              CreateEdit16(void);
+   bool              CreateEdit17(void);
+
+   bool              CreateLabel0(void);
+   bool              CreateLabel1(void);
+   bool              CreateLabel2(void);
+   bool              CreateLabel3(void);
+   bool              CreateLabel4(void);
+   bool              CreateLabel5(void);
+   bool              CreateLabel6(void);
+   bool              CreateLabel7(void);
+   bool              CreateLabel8(void);
+   bool              CreateLabel9(void);
+   bool              CreateLabel10(void);
+   bool              CreateLabel11(void);
+   bool              CreateLabel12(void);
+   bool              CreateLabel13(void);
+   bool              CreateLabel14(void);
+
+   bool              CreatePanel(void);
+
+
+
+  };
+
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+EVENT_MAP_BEGIN(CControlsDialog)
+ON_EVENT(ON_CLICK,m_button1,OnClickButton1)
+ON_EVENT(ON_CLICK,m_button2,OnClickButton2)
+ON_EVENT(ON_CLICK,m_button3,OnClickButton3)
+ON_EVENT(ON_CLICK,m_button4,OnClickButton4)
+ON_EVENT(ON_CLICK,m_button5,OnClickButton5)
+ON_EVENT(ON_CLICK,m_button6,OnClickButton6)
+ON_EVENT(ON_CLICK,m_button7,OnClickButton7)
+ON_EVENT(ON_CLICK,m_button8,OnClickButton8)
+ON_EVENT(ON_CLICK,m_button9,OnClickButton9)
+ON_EVENT(ON_CLICK,m_button10,OnClickButton10)
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ON_EVENT(ON_CLICK,m_button11,OnClickButton11)
+ON_EVENT(ON_CLICK,m_button12,OnClickButton12)
+ON_EVENT(ON_CLICK,m_button13,OnClickButton13)
+ON_EVENT(ON_CLICK,m_button14,OnClickButton14)
+ON_EVENT(ON_CLICK,m_button15,OnClickButton15)
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ON_EVENT(ON_CLICK,m_button16,OnClickButton16)
+ON_EVENT(ON_CLICK,m_button17,OnClickButton17)
+ON_EVENT(ON_CLICK,m_button18,OnClickButton18)
+ON_EVENT(ON_CLICK,m_button19,OnClickButton19)
+ON_EVENT(ON_CLICK,m_button20,OnClickButton20)
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ON_EVENT(ON_CLICK,m_button21,OnClickButton21)
+ON_EVENT(ON_CLICK,m_button22,OnClickButton22)
+ON_EVENT(ON_CLICK,m_button23,OnClickButton23)
+ON_EVENT(ON_CLICK,m_button24,OnClickButton24)
+ON_EVENT(ON_CLICK,m_button25,OnClickButton25)
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ON_EVENT(ON_CLICK,m_button26,OnClickButton26)
+ON_EVENT(ON_CLICK,m_button27,OnClickButton27)
+ON_EVENT(ON_CLICK,m_button28,OnClickButton28)
+ON_EVENT(ON_CLICK,m_button29,OnClickButton29)
+ON_EVENT(ON_CLICK,m_button30,OnClickButton30)
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ON_EVENT(ON_CLICK,m_button31,OnClickButton31)
+ON_EVENT(ON_CLICK,m_button32,OnClickButton32)
+ON_EVENT(ON_CLICK,m_button33,OnClickButton33)
+ON_EVENT(ON_CLICK,m_button34,OnClickButton34)
+ON_EVENT(ON_CLICK,m_button35,OnClickButton35)
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ON_EVENT(ON_CLICK,m_button36,OnClickButton36)
+ON_EVENT(ON_CLICK,m_button37,OnClickButton37)
+ON_EVENT(ON_CLICK,m_button38,OnClickButton38)
+ON_EVENT(ON_CLICK,m_button39,OnClickButton39)
+ON_EVENT(ON_CLICK,m_button40,OnClickButton40)
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ON_EVENT(ON_CLICK,m_button41,OnClickButton41)
+ON_EVENT(ON_CLICK,m_button42,OnClickButton42)
+ON_EVENT(ON_CLICK,m_button43,OnClickButton43)
+ON_EVENT(ON_CLICK,m_button44,OnClickButton44)
+ON_EVENT(ON_CLICK,m_button45,OnClickButton45)
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ON_EVENT(ON_CLICK,m_button46,OnClickButton46)
+ON_EVENT(ON_CLICK,m_button47,OnClickButton47)
+ON_EVENT(ON_CLICK,m_button48,OnClickButton48)
+ON_EVENT(ON_CLICK,m_button49,OnClickButton49)
+ON_EVENT(ON_CLICK,m_button50,OnClickButton50)
+ON_EVENT(ON_CLICK,m_button51,OnClickButton51)
+
+EVENT_MAP_END(CAppDialog)
+
+
+//+------------------------------------------------------------------+
+//| Constructor                                                      |
+//+------------------------------------------------------------------+
+CControlsDialog::CControlsDialog(void)
+  {
+  }
+//+------------------------------------------------------------------+
+//| Destructor                                                       |
+//+------------------------------------------------------------------+
+CControlsDialog::~CControlsDialog(void)
+  {
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::ColorBackground(const color clr)
+  {
+   string prefix=Name();
+   int total=ControlsTotal();
+   for(int i=0; i<total; i++)
+     {
+      CWnd*obj=Control(i);
+      string name=obj.Name();
+      //---
+      if(name==prefix+"Client")
+        {
+         CWndClient *wndclient=(CWndClient*) obj;
+         wndclient.ColorBackground(clr);
+         wndclient.ColorBorder(clr);
+         ChartRedraw();
+         return;
+        }
+     }
+//---
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::ColorCaption(const color clr)
+  {
+   string prefix=Name();
+   int total=ControlsTotal();
+// color clr=clrBlack;
+   for(int i=0; i<total; i++)
+     {
+      CWnd*obj=Control(i);
+      string name=obj.Name();
+      //---
+      if(name==prefix+"Caption")
+        {
+         CEdit *edit=(CEdit*) obj;
+         edit.ColorBackground(clr);
+         edit.Color(clrWhite);
+        }
+     }
+//--- Return the color
+// return clr;
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::ColorBorder(const color clr)
+  {
+   string prefix=Name();
+   int total=ControlsTotal();
+   for(int i=0; i<total; i++)
+     {
+      CWnd*obj=Control(i);
+      string name=obj.Name();
+      //---
+      if(name==prefix+"Client")
+        {
+         CWndClient *wndclient=(CWndClient*) obj;
+         wndclient.ColorBorder(clr);
+         ChartRedraw();
+         return;
+        }
+     }
+//---
+  }
+
+//+------------------------------------------------------------------+
+//| Create                                                           |
+//+------------------------------------------------------------------+
+bool CControlsDialog::Create(const long chart,const string name,const int subwin,const int x1,const int y1,const int x2,const int y2)
+  {
+   if(!CAppDialog::Create(chart,name,subwin,20,20,dashWidth,dashHeight))
+      return(false);
+//--- create dependent controls
+
+   CControlsDialog::ColorBackground(clrBlack);
+   CControlsDialog::ColorCaption(clrBlack);
+   CControlsDialog::ColorBorder(clrRed);
+
+   if(!CreatePanel())
+      return(false);
+
+
+   if(!CreateButton1())
+      return(false);
+   if(!CreateButton2())
+      return(false);
+   if(!CreateButton3())
+      return(false);
+   if(!CreateButton4())
+      return(false);
+
+   if(!CreateButton5())
+      return(false);
+   if(!CreateButton6())
+      return(false);
+   if(!CreateButton7())
+      return(false);
+   if(!CreateButton8())
+      return(false);
+   if(!CreateButton9())
+      return(false);
+   if(!CreateButton10())
+      return(false);
+   if(!CreateButton11())
+      return(false);
+   if(!CreateButton12())
+      return(false);
+   if(!CreateButton13())
+      return(false);
+   if(!CreateButton14())
+      return(false);
+   if(!CreateButton15())
+      return(false);
+   if(!CreateButton16())
+      return(false);
+   if(!CreateButton17())
+      return(false);
+   if(!CreateButton18())
+      return(false);
+   if(!CreateButton19())
+      return(false);
+   if(!CreateButton20())
+      return(false);
+   if(!CreateButton21())
+      return(false);
+   if(!CreateButton22())
+      return(false);
+   if(!CreateButton23())
+      return(false);
+   if(!CreateButton24())
+      return(false);
+   if(!CreateButton25())
+      return(false);
+   if(!CreateButton26())
+      return(false);
+   if(!CreateButton27())
+      return(false);
+
+   if(!CreateButton28())
+      return(false);
+   if(!CreateButton29())
+      return(false);
+   if(!CreateButton30())
+      return(false);
+   if(!CreateButton31())
+      return(false);
+      
+   if(!CreateButton32())
+      return(false);
+      
+   if(!CreateButton33())
+      return(false);
+   if(!CreateButton34())
+      return(false);
+   if(!CreateButton35())
+      return(false);
+   if(!CreateButton36())
+      return(false);
+   if(!CreateButton37())
+      return(false);
+      
+   if(!CreateButton38())
+      return(false);
+   if(!CreateButton39())
+      return(false);
+      
+   if(!CreateButton40())
+      return(false);
+      
+   if(!CreateButton41())
+      return(false);
+   if(!CreateButton42())
+      return(false);
+   if(!CreateButton43())
+      return(false);
+      
+   if(!CreateButton44())
+      return(false);
+   if(!CreateButton45())
+      return(false);
+   if(!CreateButton46())
+      return(false);
+   if(!CreateButton47())
+      return(false);
+   if(!CreateButton48())
+      return(false);
+      
+//   if(!CreateButton49())
+//      return(false);
+
+//if(!CreateButton50())
+//   return(false);
+//if(!CreateButton51())
+//   return(false);
+
+   if(!CreateEdit())
+      return(false);
+   if(!CreateEdit1())
+      return(false);
+   if(!CreateEdit2())
+      return(false);
+   if(!CreateEdit3())
+      return(false);
+   if(!CreateEdit4())
+      return(false);
+   if(!CreateEdit5())
+      return(false);
+   if(!CreateEdit6())
+      return(false);
+   if(!CreateEdit7())
+      return(false);
+
+   if(!CreateEdit8())
+      return(false);
+      
+   if(!CreateEdit9())
+      return(false);
+   if(!CreateEdit10())
+      return(false);
+      
+//   if(!CreateEdit11())
+//      return(false);
+//   if(!CreateEdit12())
+//      return(false);
+//   if(!CreateEdit13())
+//      return(false);
+//   if(!CreateEdit14())
+//      return(false);
+//   if(!CreateEdit15())
+//      return(false);
+//   if(!CreateEdit16())
+//      return(false);
+//   if(!CreateEdit17())
+//      return(false);
+
+
+
+//--- succeed
+   return(true);
+  }
+
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel0(void)  // Trend Info Symbol Lable
+  {
+//--- coordinates
+   int x1 = dashWidth/4 + 20;
+   int y1 = dashHeight - dashHeight + 23;
+   int x2 = x1 + 20;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label0.Create(m_chart_id,m_name+"volume",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label0.Text(string(iVolume(Symbol(),PERIOD_CURRENT,1))))
+      return(false);
+   if(!m_label0.Color(clrBlack))
+      return(false);
+   if(!m_label0.Font("Calibri"))
+      return(false);
+   if(!m_label0.FontSize(fontSize))
+      return(false);
+   if(!Add(m_label0))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel1(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = dashWidth/2 + dashWidth/5 + 40;
+   int y1 = dashHeight - dashHeight + 23;
+   int x2 = x1 + 20;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label1.Create(m_chart_id,m_name+"volatility",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label1.Text(string(iVolume(Symbol(),PERIOD_CURRENT,1))))
+      return(false);
+   if(!m_label1.Color(clrBlack))
+      return(false);
+   if(!m_label1.Font("Calibri"))
+      return(false);
+   if(!m_label1.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label1))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel2(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = dashWidth - dashWidth + 10;
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 10;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label2.Create(m_chart_id,m_name+"5M ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label2.Text("        1.5123        "))
+      return(false);
+   if(!m_label2.Color(clrBlack))
+      return(false);
+   if(!m_label2.Font("Calibri"))
+      return(false);
+   if(!m_label2.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label2))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel3(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = (11) + (dashWidth/5 - 10);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 10;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label3.Create(m_chart_id,m_name+"15M ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label3.Text("        1.5123        "))
+      return(false);
+   if(!m_label3.Color(clrBlack))
+      return(false);
+   if(!m_label3.Font("Calibri"))
+      return(false);
+   if(!m_label3.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label3))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel4(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = (12) + 2*(dashWidth/5 - 10);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 10;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label4.Create(m_chart_id,m_name+"1H ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label4.Text("        1.5123        "))
+      return(false);
+   if(!m_label4.Color(clrBlack))
+      return(false);
+   if(!m_label4.Font("Calibri"))
+      return(false);
+   if(!m_label4.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label4))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel5(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = (13) + 3*(dashWidth/5 - 10);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 10;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label5.Create(m_chart_id,m_name+"4H ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label5.Text("        1.5123        "))
+      return(false);
+   if(!m_label5.Color(clrBlack))
+      return(false);
+   if(!m_label5.Font("Calibri"))
+      return(false);
+   if(!m_label5.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label5))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel6(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = (14) + 4*(dashWidth/5 - 10);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 10;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label6.Create(m_chart_id,m_name+"trend",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label6.Text("        HOLD       "))
+      return(false);
+   if(!m_label6.Color(clrBlack))
+      return(false);
+   if(!m_label6.Font("Calibri"))
+      return(false);
+   if(!m_label6.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label6))
+      return(false);
+//--- succeed
+   return(true);
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel7(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = dashWidth/4 + 20;
+   int y1 = 105;
+   int x2 = x1 + 20;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label7.Create(m_chart_id,m_name+"balance",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label7.Text("$ "+string(AccountInfoDouble(ACCOUNT_BALANCE))))
+      return(false);
+   if(!m_label7.Color(clrBlack))
+      return(false);
+   if(!m_label7.Font("Calibri"))
+      return(false);
+   if(!m_label7.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label7))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel8(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = dashWidth/2 + dashWidth/5 + 40;
+   int y1 = 105;
+   int x2 = x1 + 20;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label8.Create(m_chart_id,m_name+"recommendedlot ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label8.Text("$ "+string(AccountInfoDouble(ACCOUNT_BALANCE))))
+      return(false);
+   if(!m_label8.Color(clrBlack))
+      return(false);
+   if(!m_label8.Font("Calibri"))
+      return(false);
+   if(!m_label8.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label8))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel9(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = dashWidth - dashWidth + 12;
+   int y1 = 140;
+   int x2 = x1 + dashWidth/5;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label9.Create(m_chart_id,m_name+"reverse sl",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label9.Text("Reverse StopLoss:"))
+      return(false);
+   if(!m_label9.Color(textColor))
+      return(false);
+   if(!m_label9.Font("Calibri"))
+      return(false);
+   if(!m_label9.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label9))
+      return(false);
+//--- succeed
+   return(true);
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel10(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = dashWidth - dashWidth + 12;
+   int y1 = 160;
+   int x2 = x1 + dashWidth/5;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label10.Create(m_chart_id,m_name+"trail stop",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label10.Text("Trailing Stop:"))
+      return(false);
+   if(!m_label10.Color(textColor))
+      return(false);
+   if(!m_label10.Font("Calibri"))
+      return(false);
+   if(!m_label10.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label10))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel11(void)  //Trend Info
+  {
+//--- coordinates
+
+
+   int x1 = (30) + (dashWidth/5 - 5);
+   int y1 = 185;
+   int x2 = x1 + dashWidth/5 - 10;
+   int y2 = y1 + 18;
+//--- create
+   if(!m_label11.Create(m_chart_id,m_name+"Buy Value",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label11.Text(string(SymbolInfoDouble(Symbol(),SYMBOL_ASK))))
+      return(false);
+   if(!m_label11.Color(clrGreen))
+      return(false);
+   if(!m_label11.Font("Calibri"))
+      return(false);
+   if(!m_label11.FontSize(fontSize + 3))
+      return(false);
+
+   if(!Add(m_label11))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel12(void)  //Trend Info
+  {
+//--- coordinates
+
+
+   int x1 = (25) + 3*(dashWidth/5 - 5);
+   int y1 = 185;
+   int x2 = x1 + dashWidth/5 - 10;
+   int y2 = y1 + 19;
+//--- create
+   if(!m_label12.Create(m_chart_id,m_name+"Sell Value",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label12.Text(string(SymbolInfoDouble(Symbol(),SYMBOL_BID))))
+      return(false);
+   if(!m_label12.Color(clrRed))
+      return(false);
+   if(!m_label12.Font("Calibri"))
+      return(false);
+   if(!m_label12.FontSize(fontSize + 3))
+      return(false);
+
+   if(!Add(m_label12))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel13(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = dashWidth - dashWidth + 12;
+   int y1 = 330;
+   int x2 = x1 + dashWidth/5;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label13.Create(m_chart_id,m_name+"reverse sl ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label13.Text("Reverse StopLoss:"))
+      return(false);
+   if(!m_label13.Color(textColor))
+      return(false);
+   if(!m_label13.Font("Calibri"))
+      return(false);
+   if(!m_label13.FontSize(fontSize))
+      return(false);
+
+   if(!Add(m_label13))
+      return(false);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateLabel14(void)  //Trend Info
+  {
+//--- coordinates
+   int x1 = dashWidth - dashWidth + 12;
+   int y1 = 352;
+   int x2 = x1 + dashWidth/5;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_label14.Create(m_chart_id,m_name+"trail stop ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_label14.Text("Trailing Stop:"))
+      return(false);
+   if(!m_label14.Color(textColor))
+      return(false);
+   if(!m_label14.Font("Calibri"))
+      return(false);
+   if(!m_label14.FontSize(fontSize))
+      return(false);
+   if(!m_label14.Color(textColor))
+      return(false);
+
+   if(!Add(m_label14))
+      return(false);
+//--- succeed
+   return(true);
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit(void)
+  {
+//--- coordinates
+   int x1 = 10 + dashWidth/5 + 5;
+   int y1 = 20;
+   int x2 = x1 + dashWidth/5 - 10;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit.Create(m_chart_id,m_name+"Volume",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit.FontSize(fontSize-1))
+      return false;
+   if(!m_edit.ColorBorder(clrBlack))
+      return false;
+   if(!m_edit.ColorBackground(clrBlack))
+      return false;
+   if(!m_edit.Text("20"))
+      return false;
+   if(!m_edit.ColorBorder(clrBlack))
+      return false;
+   if(!m_edit.Color(clrWhite))
+      return false;
+
+   if(!m_edit.ReadOnly(false))
+      return(false);
+   if(!Add(m_edit))
+      return(false);
+
+   if(!m_edit.TextAlign(ALIGN_CENTER))
+      return(false);
+
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit1(void)
+  {
+//--- coordinates
+   int x1 = 30 + dashWidth/5 - 30 + dashWidth/5 - 30 + (dashWidth/5 - 50) + (dashWidth/5 - 60);
+   int y1 = 50;
+   int x2 = 30 + dashWidth/5 - 30 + dashWidth/5 - 30 + (dashWidth/5 - 50) + (dashWidth/5 - 60) + dashWidth/5 - 30;
+   int y2 = y1 + 18;
+//--- create
+   if(!m_edit1.Create(m_chart_id,"trail stop",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit1.FontSize(fontSize-1))
+      return false;
+   if(!m_edit1.ColorBorder(colorshade))
+      return false;
+   if(!m_edit1.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit1.Text("40"))
+      return false;
+   if(!m_edit1.ReadOnly(false))
+      return(false);
+   if(!m_edit1.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit1))
+      return(false);
+   if(!m_edit1.Color(textColor))
+      return false;
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit2(void)
+  {
+//--- coordinates
+   int x1 = 22 + 6*(dashWidth/5 - 70);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 65;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit2.Create(m_chart_id,"x factor feild",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit2.FontSize(fontSize-1))
+      return false;
+   if(!m_edit2.ColorBorder(colorshade))
+      return false;
+   if(!m_edit2.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit2.ReadOnly(false))
+      return(false);
+   if(!m_edit2.Text("4"))
+      return false;
+   if(!m_edit2.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit2))
+      return(false);
+   if(!m_edit2.Color(textColor))
+      return false;
+
+
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit3(void)
+  {
+//--- coordinates
+   int x1 = 32 + 8*(dashWidth/5 - 70);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 75;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit3.Create(m_chart_id,"pips feild",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit3.FontSize(fontSize-1))
+      return false;
+   if(!m_edit3.ColorBorder(colorshade))
+      return false;
+   if(!m_edit3.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit3.Text("20"))
+      return false;
+   if(!m_edit3.ReadOnly(false))
+      return(false);
+   if(!m_edit3.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit3))
+      return(false);
+   if(!m_edit3.Color(textColor))
+      return false;
+
+
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit4(void)
+  {
+//--- coordinates
+   int x1 = 14 + dashWidth/5 - 70;
+   int y1 = 110;
+   int x2 = 14 + dashWidth/5 - 70 + dashWidth/5 - 60;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit4.Create(m_chart_id,"orders feild ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit4.FontSize(fontSize-1))
+      return false;
+   if(!m_edit4.ColorBorder(colorshade))
+      return false;
+   if(!m_edit4.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit4.Text("4"))
+      return false;
+   if(!m_edit4.ReadOnly(false))
+      return(false);
+   if(!m_edit4.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit4))
+      return(false);
+   if(!m_edit4.Color(textColor))
+      return false;
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit5(void)
+  {
+//--- coordinates
+   int x1 = 19 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65;
+   int y1 = 110;
+   int x2 = 19 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit5.Create(m_chart_id,"LOT's feild ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit5.FontSize(fontSize-1))
+      return false;
+   if(!m_edit5.ColorBorder(colorshade))
+      return false;
+   if(!m_edit5.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit5.ReadOnly(false))
+      return(false);
+   if(!m_edit5.Text("0.5"))
+      return false;
+   if(!m_edit5.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit5))
+      return(false);
+   if(!m_edit5.Color(textColor))
+      return false;
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit6(void)
+  {
+//--- coordinates
+   int x1 = 25 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65 + dashWidth/5 - 30 + dashWidth/5 - 50;
+   int y1 = 110;
+   int x2 = 25 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65 + dashWidth/5 - 30 + dashWidth/5 - 50 + dashWidth/5 - 50;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit6.Create(m_chart_id,m_name+"reverse stoploss feild ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit6.FontSize(fontSize-1))
+      return false;
+   if(!m_edit6.ColorBorder(colorshade))
+      return false;
+   if(!m_edit6.ColorBorder(colorshade))
+      return false;
+   if(!m_edit6.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit6.Text("20"))
+      return false;
+   if(!m_edit6.ReadOnly(false))
+      return(false);
+   if(!Add(m_edit6))
+      return(false);
+
+   if(!m_edit6.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!m_edit6.Color(textColor))
+      return false;
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit7(void)
+  {
+//--- coordinates
+   int x1 = 15 + dashWidth/5 - 30;
+   int y1 = 140;
+   int x2 = x1 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit7.Create(m_chart_id,m_name+"reverse stoploss feild  ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit7.FontSize(fontSize-1))
+      return false;
+   if(!m_edit7.ColorBorder(colorshade))
+      return false;
+   if(!m_edit7.ColorBorder(colorshade))
+      return false;
+   if(!m_edit7.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit7.Text("40"))
+      return false;
+   if(!m_edit7.ReadOnly(false))
+      return(false);
+   if(!Add(m_edit7))
+      return(false);
+
+   if(!m_edit7.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!m_edit7.Color(textColor))
+      return false;
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit8(void)
+  {
+//--- coordinates
+   int x1 = 25 + 3*(dashWidth/5 - 30);
+   int y1 = 140;
+   int x2 = x1 + dashWidth/5 - 40;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit8.Create(m_chart_id,"x factor feild ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit8.FontSize(fontSize-1))
+      return false;
+   if(!m_edit8.ColorBorder(colorshade))
+      return false;
+   if(!m_edit8.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit8.ReadOnly(false))
+      return(false);
+   if(!m_edit8.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit8))
+      return(false);
+   if(!m_edit8.Text("4"))
+      return false;
+   if(!m_edit8.Color(textColor))
+      return false;
+
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit9(void)
+  {
+//--- coordinates
+   int x1 = 25 + 5*(dashWidth/5 - 30);
+   int y1 = 140;
+   int x2 = x1 + dashWidth/5 - 25;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit9.Create(m_chart_id,"pips feild ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit9.FontSize(fontSize-1))
+      return false;
+   if(!m_edit9.ColorBorder(colorshade))
+      return false;
+   if(!m_edit9.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit9.ReadOnly(false))
+      return(false);
+   if(!m_edit9.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit9))
+      return(false);
+   if(!m_edit9.Text("0"))
+      return false;
+   if(!m_edit9.Color(textColor))
+      return false;
+
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit10(void)
+  {
+//--- coordinates
+   int x1 = 10;
+   int y1 = 230;
+   int x2 = x1 + dashWidth/5 +20;
+   int y2 = y1 + 60;
+//--- create
+   if(!m_edit10.Create(m_chart_id,"orders feild  ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit10.FontSize(fontSize-1))
+      return false;
+   if(!m_edit10.ColorBorder(colorshade))
+      return false;
+   if(!m_edit10.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit10.ReadOnly(false))
+      return(false);
+   if(!m_edit10.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit10))
+      return(false);
+   if(!m_edit10.Text("0.0"))
+      return false;
+   if(!m_edit10.Color(textColor))
+      return false;
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit11(void)
+  {
+//--- coordinates
+   int x1 = (16) + 3*(dashWidth/5 - 30);
+   int y1 = 435;
+   int x2 = x1 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit11.Create(m_chart_id,"LOT's feild  ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit11.FontSize(fontSize-1))
+      return false;
+   if(!m_edit11.ColorBorder(colorshade))
+      return false;
+   if(!m_edit11.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit11.ReadOnly(false))
+      return(false);
+   if(!m_edit11.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit11))
+      return(false);
+   if(!m_edit11.Text("0.5"))
+      return false;
+   if(!m_edit11.Color(textColor))
+      return false;
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit12(void)
+  {
+//--- coordinates
+   int x1 = 10;
+   int y1 = 520;
+   int x2 = x1 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit12.Create(m_chart_id,"buy $ feild ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit12.FontSize(fontSize-1))
+      return false;
+   if(!m_edit12.ColorBorder(colorshade))
+      return false;
+   if(!m_edit12.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit12.ReadOnly(true))
+      return(false);
+   if(!m_edit12.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit12))
+      return(false);
+   if(!m_edit12.Color(textColor))
+      return false;
+
+
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit13(void)
+  {
+//--- coordinates
+   int x1 = (12) + (dashWidth/5 - 30);
+   int y1 = 520;
+   int x2 = x1 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit13.Create(m_chart_id,"Sell $ feild",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit13.FontSize(fontSize-1))
+      return false;
+   if(!m_edit13.ColorBorder(colorshade))
+      return false;
+   if(!m_edit13.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit13.ReadOnly(true))
+      return(false);
+   if(!m_edit13.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit13))
+      return(false);
+   if(!m_edit13.Color(textColor))
+      return false;
+
+
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit14(void)
+  {
+//--- coordinates
+   int x1 = (14) + 2*(dashWidth/5 - 30);
+   int y1 = 520;
+   int x2 = x1 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit14.Create(m_chart_id,"Blue $ feild  ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit14.FontSize(fontSize-1))
+      return false;
+   if(!m_edit14.ColorBorder(colorshade))
+      return false;
+   if(!m_edit14.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit14.ReadOnly(true))
+      return(false);
+   if(!m_edit14.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit14))
+      return(false);
+   if(!m_edit14.Color(textColor))
+      return false;
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit15(void)
+  {
+//--- coordinates
+   int x1 = (16) + 3*(dashWidth/5 - 30);
+   int y1 = 520;
+   int x2 = x1 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit15.Create(m_chart_id,"Red $ feild  ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit15.FontSize(fontSize-1))
+      return false;
+   if(!m_edit15.ColorBorder(colorshade))
+      return false;
+   if(!m_edit15.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit15.ReadOnly(true))
+      return(false);
+   if(!m_edit15.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit15))
+      return(false);
+   if(!m_edit15.Color(textColor))
+      return false;
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit16(void)
+  {
+//--- coordinates
+   int x1 = (18) + 4*(dashWidth/5 - 30);
+   int y1 = 520;
+   int x2 = x1 + dashWidth/5 - 25;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit16.Create(m_chart_id,"All $ Feild ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit16.FontSize(fontSize-1))
+      return false;
+   if(!m_edit16.ColorBorder(colorshade))
+      return false;
+   if(!m_edit16.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit16.ReadOnly(true))
+      return(false);
+   if(!m_edit16.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit16))
+      return(false);
+   if(!m_edit16.Color(textColor))
+      return false;
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateEdit17(void)
+  {
+//--- coordinates
+   int x1 = (dashWidth/2 + dashWidth/5) + 15;
+   int y1 = dashHeight - dashHeight + 110;
+   int x2 = x1 + dashWidth/5 - 10;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_edit17.Create(m_chart_id,"recommended lot edit field",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_edit17.FontSize(fontSize-1))
+      return false;
+   if(!m_edit17.ColorBorder(colorshade))
+      return false;
+   if(!m_edit17.ColorBackground(dashBoardBack))
+      return false;
+   if(!m_edit17.ReadOnly(false))
+      return(false);
+   if(!m_edit17.TextAlign(ALIGN_CENTER))
+      return(false);
+   if(!Add(m_edit17))
+      return(false);
+   if(!m_edit17.Color(textColor))
+      return false;
+
+//--- succeed
+   return(true);
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton1(void)
+  {
+//--- coordinates
+
+   int x1 = dashWidth - dashWidth + 10;
+   int y1 = dashHeight - dashHeight + 20;
+   int x2 = x1 + dashWidth/5;
+   int y2 = y1 + 20;
+
+//--- create
+   if(!m_button1.Create(m_chart_id,m_name+"Buy Button",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button1.ColorBackground(clrGreen))
+      return(false);
+   if(!m_button1.Text("Buy"))
+      return(false);
+   if(!m_button1.FontSize(fontSize-1))
+      return(false);
+   if(!m_button1.Color(clrWhite))
+      return(false);
+   if(!m_button1.ColorBorder(clrGreen))
+      return(false);
+   if(!Add(m_button1))
+      return(false);
+
+
+
+   m_button1.Locking(true);
+   m_button1.BringToTop();
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton2(void)
+  {
+//--- coordinates
+   int x1 = 15 + dashWidth/5 + 5 + (dashWidth/5 - 10);
+   int y1 = dashHeight - dashHeight + 20;
+   int x2 = 15 + dashWidth/5 + 5 + (dashWidth/5 - 10) + (dashWidth/5);
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button2.Create(m_chart_id,m_name+"Sell button",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button2.ColorBackground(clrRed))
+      return(false);
+   if(!m_button2.Text("Sell "))
+      return(false);
+   if(!m_button2.FontSize(fontSize-1))
+      return(false);
+   if(!m_button2.Color(clrWhite))
+      return(false);
+   if(!m_button2.ColorBorder(clrRed))
+      return(false);
+   if(!Add(m_button2))
+      return(false);
+   m_button2.Locking(true);
+//--- succeed
+   return(true);
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton3(void)
+  {
+//--- coordinates
+   int x1 = 20 + dashWidth/5 + 5 + (dashWidth/5 - 10) + (dashWidth/5);
+   int y1 = 20;
+   int x2 = 20 + dashWidth/5 + 5 + (dashWidth/5 - 10) + (dashWidth/5) + (dashWidth/5 - 30);
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button3.Create(m_chart_id,m_name+"TSL",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button3.ColorBackground(clrGreen))
+      return(false);
+   if(!m_button3.Text("TSL"))
+      return(false);
+   if(!m_button3.FontSize(fontSize-1))
+      return(false);
+   if(!m_button3.Color(clrWhite))
+      return(false);
+   if(!m_button3.ColorBorder(clrGreen))
+      return(false);
+   if(!Add(m_button3))
+      return(false);
+   m_button3.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton4(void)
+  {
+//--- coordinates
+   int x1 = 25 + dashWidth/5 + 5 + (dashWidth/5 - 10) + (dashWidth/5) + (dashWidth/5 - 30);
+   int y1 = 20;
+   int x2 = x1 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button4.Create(m_chart_id,m_name+"BE",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button4.ColorBackground(clrRed))
+      return(false);
+   if(!m_button4.Text("BE"))
+      return(false);
+   if(!m_button4.FontSize(fontSize-1))
+      return(false);
+   if(!m_button4.Color(clrWhite))
+      return(false);
+   if(!m_button4.ColorBorder(clrWhite))
+      return(false);
+   if(!Add(m_button4))
+      return(false);
+   m_button4.Locking(true);
+//--- succeed
+   return(true);
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton5(void)
+  {
+//--- coordinates
+   int x1 = 10;
+   int y1 = 50;
+   int x2 = 10 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button5.Create(m_chart_id,m_name+"stop",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button5.ColorBackground(clrGreen))
+      return(false);
+   if(!m_button5.Text("Stop"))
+      return(false);
+   if(!m_button5.FontSize(fontSize-1))
+      return(false);
+   if(!m_button5.Color(clrWhite))
+      return(false);
+   if(!m_button5.ColorBorder(clrGreen))
+      return(false);
+   if(!Add(m_button5))
+      return(false);
+   m_button5.Locking(true);
+
+
+//--- succeed
+   return(true);
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton6(void)
+  {
+//--- coordinates
+   int x1 = 15 + dashWidth/5 - 30 ;
+   int y1 = 50;
+   int x2 = 15 + dashWidth/5 - 30 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button6.Create(m_chart_id,m_name+"Limit",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button6.ColorBackground(clrRed))
+      return(false);
+   if(!m_button6.Text("Limit"))
+      return(false);
+   if(!m_button6.FontSize(fontSize-1))
+      return(false);
+   if(!m_button6.Color(clrWhite))
+      return(false);
+   if(!m_button6.ColorBorder(clrRed))
+      return(false);
+   if(!Add(m_button6))
+      return(false);
+   m_button6.Locking(true);
+//--- succeed
+   return(true);
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton7(void)
+  {
+//--- coordinates
+   int x1 = 20 + dashWidth/5 - 30 + dashWidth/5 - 30;
+   int y1 = 50;
+   int x2 = 20 + dashWidth/5 - 30 + dashWidth/5 - 30 + (dashWidth/5 - 50);
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button7.Create(m_chart_id,m_name+"/",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button7.ColorBackground(clrPurple))
+      return(false);
+   if(!m_button7.Text("/"))
+      return(false);
+   if(!m_button7.FontSize(fontSize-1))
+      return(false);
+   if(!m_button7.Color(clrWhite))
+      return(false);
+   if(!m_button7.ColorBorder(clrPurple))
+      return(false);
+   if(!Add(m_button7))
+      return(false);
+   m_button7.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton8(void)
+  {
+//--- coordinates
+   int x1 = 25 + dashWidth/5 - 30 + dashWidth/5 - 30 + (dashWidth/5 - 50);
+   int y1 = 50;
+   int x2 = 25 + dashWidth/5 - 30 + dashWidth/5 - 30 + (dashWidth/5 - 50) + (dashWidth/5 - 60);
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button8.Create(m_chart_id,m_name+"---",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button8.ColorBackground(clrOrange))
+      return(false);
+   if(!m_button8.Text("---"))
+      return(false);
+   if(!m_button8.FontSize(fontSize-1))
+      return(false);
+   if(!m_button8.Color(clrWhite))
+      return(false);
+   if(!m_button8.ColorBorder(clrOrange))
+      return(false);
+   if(!Add(m_button8))
+      return(false);
+   m_button8.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton9(void)
+  {
+//--- coordinates
+   int x1 = 33 + dashWidth/5 - 30 + dashWidth/5 - 30 + (dashWidth/5 - 50) + (dashWidth/5 - 60) + dashWidth/5 - 30;
+   int y1 = 50;
+   int x2 = 30 + dashWidth/5 - 30 + dashWidth/5 - 30 + (dashWidth/5 - 50) + (dashWidth/5 - 60) + dashWidth/5 - 30 + (dashWidth/5 - 40);
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button9.Create(m_chart_id,m_name+"buy",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button9.ColorBackground(clrGreen))
+      return(false);
+   if(!m_button9.Text("BUY"))
+      return(false);
+   if(!m_button9.FontSize(fontSize-1))
+      return(false);
+   if(!m_button9.Color(clrWhite))
+      return(false);
+   if(!m_button9.ColorBorder(clrGreen))
+      return(false);
+   if(!Add(m_button9))
+      return(false);
+   m_button9.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton10(void)
+  {
+//--- coordinates
+   int x1 = 35 + dashWidth/5 - 30 + dashWidth/5 - 30 + (dashWidth/5 - 50) + (dashWidth/5 - 60) + dashWidth/5 - 30 + (dashWidth/5 - 40);;
+   int y1 = 50;
+   int x2 = x1 + dashWidth/5 - 55;
+   int y2 = y1 + 19;
+//--- create
+   if(!m_button10.Create(m_chart_id,m_name+"sell ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button10.ColorBackground(clrRed))
+      return(false);
+   if(!m_button10.Text("Sell"))
+      return(false);
+   if(!m_button10.FontSize(fontSize-1))
+      return(false);
+   if(!m_button10.Color(clrWhite))
+      return(false);
+   if(!m_button10.ColorBorder(clrRed))
+      return(false);
+   if(!Add(m_button10))
+      return(false);
+   m_button10.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton11(void)
+  {
+//--- coordinates
+   int x1 = 10;
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 70;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button11.Create(m_chart_id,m_name+"@",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button11.ColorBackground(clrGreen))
+      return(false);
+   if(!m_button11.Text("@"))
+      return(false);
+   if(!m_button11.FontSize(fontSize-1))
+      return(false);
+   if(!m_button11.Color(clrWhite))
+      return(false);
+   if(!m_button11.ColorBorder(clrGreen))
+      return(false);
+   if(!Add(m_button11))
+      return(false);
+   m_button11.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton12(void)
+  {
+//--- coordinates
+   int x1 = 12 + dashWidth/5 - 70;
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 70;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button12.Create(m_chart_id,m_name+"+",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button12.ColorBackground(clrGreen))
+      return(false);
+   if(!m_button12.Text("+"))
+      return(false);
+   if(!m_button12.FontSize(fontSize-1))
+      return(false);
+   if(!m_button12.Color(clrWhite))
+      return(false);
+   if(!m_button12.ColorBorder(clrGreen))
+      return(false);
+   if(!Add(m_button12))
+      return(false);
+   m_button12.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton13(void)
+  {
+//--- coordinates
+   int x1 = 14 + 2*(dashWidth/5 - 70);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 70;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button13.Create(m_chart_id,m_name+"^  ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button13.ColorBackground(clrBrown))
+      return(false);
+   if(!m_button13.Text("^"))
+      return(false);
+   if(!m_button13.FontSize(fontSize-1))
+      return(false);
+   if(!m_button13.Color(clrWhite))
+      return(false);
+   if(!m_button13.ColorBorder(clrBrown))
+      return(false);
+   if(!Add(m_button13))
+      return(false);
+   m_button13.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton14(void)
+  {
+//--- coordinates
+   int x1 = 16 + 3*(dashWidth/5 - 70);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 70;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button14.Create(m_chart_id,m_name+"% ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button14.ColorBackground(clrPurple))
+      return(false);
+   if(!m_button14.Text("%"))
+      return(false);
+   if(!m_button14.FontSize(fontSize-1))
+      return(false);
+   if(!m_button14.Color(clrWhite))
+      return(false);
+   if(!m_button14.ColorBorder(clrPurple))
+      return(false);
+   if(!Add(m_button14))
+      return(false);
+   m_button14.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton15(void)
+  {
+//--- coordinates
+   int x1 = 18 + 4*(dashWidth/5 - 70);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 70;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button15.Create(m_chart_id,m_name+"$",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button15.ColorBackground(clrRed))
+      return(false);
+   if(!m_button15.Text("$"))
+      return(false);
+   if(!m_button15.FontSize(fontSize-1))
+      return(false);
+   if(!m_button15.Color(clrWhite))
+      return(false);
+   if(!m_button15.ColorBorder(clrRed))
+      return(false);
+   if(!Add(m_button15))
+      return(false);
+   m_button15.Locking(true);
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton16(void)
+  {
+//--- coordinates
+   int x1 = 20 + 5*(dashWidth/5 - 70);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 70;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button16.Create(m_chart_id,m_name+"*",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button16.ColorBackground(clrOrange))
+      return(false);
+   if(!m_button16.Text(" *"))
+      return(false);
+   if(!m_button16.FontSize(fontSize-1))
+      return(false);
+   if(!m_button16.Color(clrWhite))
+      return(false);
+   if(!m_button16.ColorBorder(clrOrange))
+      return(false);
+   if(!Add(m_button16))
+      return(false);
+   m_button16.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton17(void)
+  {
+//--- coordinates
+   int x1 = 29 + 7*(dashWidth/5 - 70);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 70;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button17.Create(m_chart_id,m_name+"C",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button17.ColorBackground(clrRed))
+      return(false);
+   if(!m_button17.Text("C"))
+      return(false);
+   if(!m_button17.FontSize(fontSize - 1))
+      return(false);
+   if(!m_button17.Color(clrWhite))
+      return(false);
+   if(!m_button17.ColorBorder(clrRed))
+      return(false);
+   if(!Add(m_button17))
+      return(false);
+   m_button17.Locking(true);
+//--- succeed
+   return(true);
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton18(void)
+  {
+//--- coordinates
+   int x1 = 30 + 9*(dashWidth/5 - 70);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 48;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button18.Create(m_chart_id,m_name+"hedge",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button18.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button18.Text("Hedge"))
+      return(false);
+   if(!m_button18.FontSize(fontSize - 2))
+      return(false);
+   if(!m_button18.Color(clrWhite))
+      return(false);
+   if(!m_button18.ColorBorder(clrYellow))
+      return(false);
+   if(!Add(m_button18))
+      return(false);
+   m_button18.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton19(void)
+  {
+//--- coordinates
+   int x1 = 55 + 10*(dashWidth/5 - 70);
+   int y1 = 80;
+   int x2 = x1 + dashWidth/5 - 55;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button19.Create(m_chart_id,m_name+"Hedge2",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button19.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button19.Text("Hedge2"))
+      return(false);
+   if(!m_button19.FontSize(fontSize - 2))
+      return(false);
+   if(!m_button19.Color(clrWhite))
+      return(false);
+   if(!m_button19.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button19))
+      return(false);
+   m_button19.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton20(void)
+  {
+//--- coordinates
+   int x1 = 10;
+   int y1 = 110;
+   int x2 = x1 + dashWidth/5 - 70;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button20.Create(m_chart_id,m_name+"BEE",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button20.ColorBackground(clrGreen))
+      return(false);
+   if(!m_button20.Text("BE"))
+      return(false);
+   if(!m_button20.FontSize(fontSize))
+      return(false);
+   if(!m_button20.Color(clrWhite))
+      return(false);
+   if(!m_button20.ColorBorder(clrGreen))
+      return(false);
+   if(!Add(m_button20))
+      return(false);
+   m_button20.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton21(void)
+  {
+//--- coordinates
+   int x1 = 16 + dashWidth/5 - 70 + dashWidth/5 - 60;
+   int y1 = 110;
+   int x2 = 16 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button21.Create(m_chart_id,m_name+"TSL ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button21.ColorBackground(clrGray))
+      return(false);
+   if(!m_button21.Text("TSL"))
+      return(false);
+   if(!m_button21.FontSize(fontSize))
+      return(false);
+   if(!m_button21.Color(clrWhite))
+      return(false);
+   if(!m_button21.ColorBorder(clrGray))
+      return(false);
+   if(!Add(m_button21))
+      return(false);
+   m_button21.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton22(void)
+  {
+//--- coordinates
+   int x1 = 22 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65 + dashWidth/5 - 30;
+   int y1 = 110;
+   int x2 = 22 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65 + dashWidth/5 - 30 + dashWidth/5 - 50;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button22.Create(m_chart_id,m_name+"hedge  ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button22.ColorBackground(colorshade))
+      return(false);
+   if(!m_button22.Text("Hedge"))
+      return(false);
+   if(!m_button22.FontSize(fontSize - 2))
+      return(false);
+   if(!m_button22.Color(clrAntiqueWhite))
+      return(false);
+   if(!m_button22.ColorBorder(colorshade))
+      return(false);
+   if(!Add(m_button22))
+      return(false);
+
+
+   m_button22.Locking(true);
+
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton23(void)
+  {
+//--- coordinates
+   int x1 = 30 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65 + dashWidth/5 - 30 + dashWidth/5 - 50 + dashWidth/5 - 50;
+   int y1 = 110;
+   int x2 = 30 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65 + dashWidth/5 - 30 + dashWidth/5 - 50 + dashWidth/5 - 50 + dashWidth/5 - 65;
+   int y2 = y1 + 19;
+//--- create
+   if(!m_button23.Create(m_chart_id,m_name+"x BL",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button23.ColorBackground(clrGreen))
+      return(false);
+   if(!m_button23.Text("X BL"))
+      return(false);
+   if(!m_button23.FontSize(fontSize-1))
+      return(false);
+   if(!m_button23.Color(clrWhite))
+      return(false);
+   if(!m_button23.ColorBorder(clrGreen))
+      return(false);
+   if(!Add(m_button23))
+      return(false);
+   m_button23.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton24(void)
+  {
+//--- coordinates
+   int x1 = 33 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65 + dashWidth/5 - 30 + dashWidth/5 - 50 + dashWidth/5 - 50 + dashWidth/5 - 65;
+   int y1 = 110;
+   int x2 = 33 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65 + dashWidth/5 - 30 + dashWidth/5 - 50 + dashWidth/5 - 50 + dashWidth/5 - 65 + dashWidth/5 - 70;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button24.Create(m_chart_id,m_name+"XL",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button24.ColorBackground(clrLightSkyBlue))
+      return(false);
+   if(!m_button24.Text("X L"))
+      return(false);
+   if(!m_button24.FontSize(fontSize-1))
+      return(false);
+   if(!m_button24.Color(clrAntiqueWhite))
+      return(false);
+   if(!m_button24.ColorBorder(clrLightSkyBlue))
+      return(false);
+   if(!Add(m_button24))
+      return(false);
+   m_button24.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton25(void)
+  {
+//--- coordinates
+   int x1 = 37 + dashWidth/5 - 70 + dashWidth/5 - 60 + dashWidth/5 - 65 + dashWidth/5 - 30 + dashWidth/5 - 50 + dashWidth/5 - 50 + dashWidth/5 - 65 + dashWidth/5 - 70;;
+   int y1 = 110;
+   int x2 = x1 + dashWidth/5 - 57;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button25.Create(m_chart_id,m_name+" X SL",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button25.ColorBackground(clrRed))
+      return(false);
+   if(!m_button25.Text("x SL"))
+      return(false);
+   if(!m_button25.FontSize(fontSize-1))
+      return(false);
+   if(!m_button25.Color(clrWhite))
+      return(false);
+   if(!m_button25.ColorBorder(clrRed))
+      return(false);
+   if(!Add(m_button25))
+      return(false);
+   m_button25.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton26(void)
+  {
+//--- coordinates
+   int x1 = 10;
+   int y1 = 140;
+   int x2 = 10 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button26.Create(m_chart_id,m_name+"close   ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button26.ColorBackground(clrGreen))
+      return(false);
+   if(!m_button26.Text("Close"))
+      return(false);
+   if(!m_button26.FontSize(fontSize-1))
+      return(false);
+   if(!m_button26.Color(clrWhite))
+      return(false);
+   if(!m_button26.ColorBorder(clrGreen))
+      return(false);
+   if(!Add(m_button26))
+      return(false);
+   m_button26.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton27(void)
+  {
+//--- coordinates
+   int x1 = 20 + 2*(dashWidth/5 - 30);
+   int y1 = 140;
+   int x2 = x1 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button27.Create(m_chart_id,m_name+"p and L",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button27.ColorBackground(clrDarkGray))
+      return(false);
+   if(!m_button27.Text("P/L"))
+      return(false);
+   if(!m_button27.FontSize(fontSize- 1))
+      return(false);
+   if(!m_button27.Color(clrAntiqueWhite))
+      return(false);
+   if(!m_button27.ColorBorder(clrDarkGray))
+      return(false);
+   if(!Add(m_button27))
+      return(false);
+   m_button27.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton28(void)
+  {
+//--- coordinates
+   int x1 = 20 + 4*(dashWidth/5 - 30);
+   int y1 = 140;
+   int x2 = x1 + dashWidth/5 - 35;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button28.Create(m_chart_id,m_name+"close  ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button28.ColorBackground(clrRed))
+      return(false);
+   if(!m_button28.Text("close"))
+      return(false);
+   if(!m_button28.FontSize(fontSize - 1))
+      return(false);
+   if(!m_button28.Color(clrWhite))
+      return(false);
+   if(!m_button28.ColorBorder(clrRed))
+      return(false);
+   if(!Add(m_button28))
+      return(false);
+   m_button28.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton29(void)
+  {
+//--- coordinates
+   int x1 = 10;
+   int y1 = 170;
+   int x2 = 10 + dashWidth/5 + 20;
+   int y2 = y1 + 22;
+//--- create
+   if(!m_button29.Create(m_chart_id,m_name+"Cierre Total ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button29.ColorBackground(clrRed))
+      return(false);
+   if(!m_button29.Text("Cierre Total"))
+      return(false);
+   if(!m_button29.FontSize(fontSize - 1))
+      return(false);
+   if(!m_button29.Color(clrWhite))
+      return(false);
+   if(!m_button29.ColorBorder(clrRed))
+      return(false);
+   if(!Add(m_button29))
+      return(false);
+   m_button29.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton30(void)
+  {
+//--- coordinates
+   int x1 = 45 + dashWidth/5 + 20;
+   int y1 = 170;
+   int x2 = 45 + dashWidth/5 + 20 + dashWidth/5 + 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button30.Create(m_chart_id,m_name+"All Buy  ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button30.ColorBackground(clrGreen))
+      return(false);
+   if(!m_button30.Text("ALL Buy"))
+      return(false);
+   if(!m_button30.FontSize(fontSize))
+      return(false);
+   if(!m_button30.Color(clrWhite))
+      return(false);
+   if(!m_button30.ColorBorder(clrGreen))
+      return(false);
+   if(!Add(m_button30))
+      return(false);
+   m_button30.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton31(void)
+  {
+//--- coordinates
+   int x1 = 90 + dashWidth/5 + 20 + dashWidth/5 + 30;
+   int y1 = 170;
+   int x2 = x1 + dashWidth/5 + 40;
+   int y2 = y1 + 22;
+//--- create
+   if(!m_button31.Create(m_chart_id,m_name+"All Sell",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button31.ColorBackground(clrRed))
+      return(false);
+   if(!m_button31.Text("All Sell"))
+      return(false);
+   if(!m_button31.FontSize(fontSize))
+      return(false);
+   if(!m_button31.Color(clrWhite))
+      return(false);
+   if(!m_button31.ColorBorder(clrRed))
+      return(false);
+   if(!Add(m_button31))
+      return(false);
+   m_button31.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton32(void)
+  {
+//--- coordinates
+   int x1 = 10;
+   int y1 = 200;
+   int x2 = x1 + dashWidth/5 - 35;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button32.Create(m_chart_id,m_name+"/\ ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button32.ColorBackground(clrOrange))
+      return(false);
+   if(!m_button32.Text("/\""))
+      return(false);
+   if(!m_button32.FontSize(fontSize))
+      return(false);
+   if(!m_button32.Color(clrWhite))
+      return(false);
+   if(!m_button32.ColorBorder(clrOrange))
+      return(false);
+   if(!Add(m_button32))
+      return(false);
+   m_button32.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton33(void)
+  {
+//--- coordinates
+   int x1 = 20 + dashWidth/5 - 35;
+   int y1 = 200;
+   int x2 = 20 + dashWidth/5 - 35 + dashWidth/5 - 40;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button33.Create(m_chart_id,m_name+"x 25 %",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button33.ColorBackground(clrGray))
+      return(false);
+   if(!m_button33.Text("x 25 %"))
+      return(false);
+   if(!m_button33.FontSize(fontSize))
+      return(false);
+   if(!m_button33.Color(clrWhite))
+      return(false);
+   if(!m_button33.ColorBorder(clrGray))
+      return(false);
+   if(!Add(m_button33))
+      return(false);
+   m_button33.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton34(void)
+  {
+//--- coordinates
+   int x1 = 20 + 2*(dashWidth/5 - 35);
+   int y1 = 200;
+   int x2 = x1+ dashWidth/5 - 40;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button34.Create(m_chart_id,m_name+"x 50 %",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button34.ColorBackground(clrGray))
+      return(false);
+   if(!m_button34.Text("x 50 %"))
+      return(false);
+   if(!m_button34.FontSize(fontSize-1))
+      return(false);
+   if(!m_button34.Color(clrWhite))
+      return(false);
+   if(!m_button34.ColorBorder(clrGray))
+      return(false);
+   if(!Add(m_button34))
+      return(false);
+   m_button34.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton35(void)
+  {
+//--- coordinates
+   int x1 = 20 + 3*(dashWidth/5 - 35);
+   int y1 = 200;
+   int x2 = x1 + dashWidth/5 - 40;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button35.Create(m_chart_id,m_name+"x 75 %",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button35.ColorBackground(clrGray))
+      return(false);
+   if(!m_button35.Text("x 75 %"))
+      return(false);
+   if(!m_button35.FontSize(fontSize))
+      return(false);
+   if(!m_button35.Color(clrWhite))
+      return(false);
+   if(!m_button35.ColorBorder(clrGray))
+      return(false);
+   if(!Add(m_button35))
+      return(false);
+   m_button35.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton36(void)
+  {
+//--- coordinates
+   int x1 = 20 + 4*(dashWidth/5 - 35);
+   int y1 = 200;
+   int x2 = x1 + dashWidth/5 - 40;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button36.Create(m_chart_id,m_name+"toDo",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button36.ColorBackground(clrBlue))
+      return(false);
+   if(!m_button36.Text("To do"))
+      return(false);
+   if(!m_button36.FontSize(fontSize))
+      return(false);
+   if(!m_button36.Color(clrWhite))
+      return(false);
+   if(!m_button36.ColorBorder(clrBlue))
+      return(false);
+   if(!Add(m_button36))
+      return(false);
+   m_button36.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton37(void)
+  {
+//--- coordinates
+   int x1 = 17 + 5*(dashWidth/5 - 35);
+   int y1 = 200;
+   int x2 = x1 + dashWidth/5 - 40;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button37.Create(m_chart_id,m_name+"for dentr",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button37.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button37.Text("for dentr"))
+      return(false);
+   if(!m_button37.FontSize(fontSize - 2))
+      return(false);
+   if(!m_button37.Color(clrWhite))
+      return(false);
+   if(!m_button37.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button37))
+      return(false);
+   m_button37.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton38(void)
+  {
+//--- coordinates
+   int x1 = 15 + 6*(dashWidth/5 - 35);
+   int y1 = 200;
+   int x2 = x1 + dashWidth/5 - 60;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button38.Create(m_chart_id,m_name+"pro Feura",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button38.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button38.Text("pro Feura"))
+      return(false);
+   if(!m_button38.FontSize(fontSize - 2))
+      return(false);
+   if(!m_button38.Color(clrWhite))
+      return(false);
+   if(!m_button38.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button38))
+      return(false);
+   m_button38.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton39(void)
+  {
+//--- coordinates
+   int x1 = 13 + dashWidth/5 +20;
+   int y1 = 230;
+   int x2 = 13 + dashWidth/5 +20 + dashWidth/5 - 50;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button39.Create(m_chart_id,m_name+"1",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button39.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button39.Text("1"))
+      return(false);
+   if(!m_button39.FontSize(fontSize))
+      return(false);
+   if(!m_button39.Color(clrWhite))
+      return(false);
+   if(!m_button39.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button39))
+      return(false);
+   m_button39.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton40(void)
+  {
+//--- coordinates
+   int x1 = 15 + dashWidth/5 +20 + dashWidth/5 - 50;
+   int y1 = 230;
+   int x2 = 15 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button40.Create(m_chart_id,m_name+"2",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button40.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button40.Text("2"))
+      return(false);
+   if(!m_button40.FontSize(fontSize - 2))
+      return(false);
+   if(!m_button40.Color(clrWhite))
+      return(false);
+   if(!m_button40.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button40))
+      return(false);
+   m_button40.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton41(void)
+  {
+//--- coordinates
+   int x1 = 17 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40;;
+   int y1 = 230;
+   int x2 = 15 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button41.Create(m_chart_id,m_name+"3",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button41.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button41.Text("3"))
+      return(false);
+   if(!m_button41.FontSize(fontSize - 1))
+      return(false);
+   if(!m_button41.Color(clrWhite))
+      return(false);
+   if(!m_button41.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button41))
+      return(false);
+
+   m_button41.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton42(void)
+  {
+//--- coordinates
+   int x1 = 17 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40 + dashWidth/5 - 30;
+   int y1 = 230;
+   int x2 = 15 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40 + dashWidth/5 - 30 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button42.Create(m_chart_id,m_name+"4",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button42.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button42.Text("4"))
+      return(false);
+   if(!m_button42.FontSize(fontSize - 2))
+      return(false);
+   if(!m_button42.Color(clrWhite))
+      return(false);
+   if(!m_button42.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button42))
+      return(false);
+   m_button42.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton43(void)
+  {
+//--- coordinates
+   int x1 = 17 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40 + dashWidth/5 - 30 + dashWidth/5 - 30;;
+   int y1 = 230;
+   int x2 = x1 + dashWidth/5 - 35;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button43.Create(m_chart_id,m_name+"5",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button43.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button43.Text("5"))
+      return(false);
+   if(!m_button43.FontSize(fontSize - 1))
+      return(false);
+   if(!m_button43.Color(clrWhite))
+      return(false);
+   if(!m_button43.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button43))
+      return(false);
+   m_button43.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton44(void)
+  {
+//--- coordinates
+   int x1 = 13 + dashWidth/5 +20;
+   int y1 = 260;
+   int x2 = 13 + dashWidth/5 +20 + dashWidth/5 - 50;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button44.Create(m_chart_id,m_name+"6",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button44.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button44.Text("6"))
+      return(false);
+   if(!m_button44.FontSize(fontSize - 1))
+      return(false);
+   if(!m_button44.Color(clrWhite))
+      return(false);
+   if(!m_button44.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button44))
+      return(false);
+   m_button44.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton45(void)
+  {
+//--- coordinates
+   int x1 = 15 + dashWidth/5 +20 + dashWidth/5 - 50;
+   int y1 = 260;
+   int x2 = 15 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button45.Create(m_chart_id,m_name+"7",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button45.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button45.Text("7"))
+      return(false);
+   if(!m_button45.FontSize(fontSize - 1))
+      return(false);
+   if(!m_button45.Color(clrWhite))
+      return(false);
+   if(!m_button45.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button45))
+      return(false);
+   m_button45.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton46(void)
+  {
+//--- coordinates
+   int x1 = 17 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40;;
+   int y1 = 260;
+   int x2 = 15 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button46.Create(m_chart_id,m_name+"8",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button46.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button46.Text("8"))
+      return(false);
+   if(!m_button46.FontSize(fontSize - 1))
+      return(false);
+   if(!m_button46.Color(clrWhite))
+      return(false);
+   if(!m_button46.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button46))
+      return(false);
+   m_button46.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton47(void)
+  {
+//--- coordinates
+   int x1 = 17 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40 + dashWidth/5 - 30;
+   int y1 = 260;
+   int x2 = 15 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40 + dashWidth/5 - 30 + dashWidth/5 - 30;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button47.Create(m_chart_id,m_name+"9",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button47.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button47.Text("9"))
+      return(false);
+   if(!m_button47.FontSize(fontSize - 1))
+      return(false);
+   if(!m_button47.Color(clrWhite))
+      return(false);
+   if(!m_button47.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button47))
+      return(false);
+   m_button47.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton48(void)
+  {
+//--- coordinates
+   int x1 = 17 + dashWidth/5 +20 + dashWidth/5 - 50 + dashWidth/5 - 40 + dashWidth/5 - 30 + dashWidth/5 - 30;;
+   int y1 = 260;
+   int x2 = x1 + dashWidth/5 - 35;
+   int y2 = y1 + 20;
+//--- create
+   if(!m_button48.Create(m_chart_id,m_name+"10",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button48.ColorBackground(clrOrangeRed))
+      return(false);
+   if(!m_button48.Text("10"))
+      return(false);
+   if(!m_button48.FontSize(fontSize - 1))
+      return(false);
+   if(!m_button48.Color(clrWhite))
+      return(false);
+   if(!m_button48.ColorBorder(clrOrangeRed))
+      return(false);
+   if(!Add(m_button48))
+      return(false);
+   m_button48.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton49(void)
+  {
+//--- coordinates
+   int x1 = 5;
+   int y1 = 48;
+   int x2 = dashWidth - 30;
+   int y2 = y1 + 58;
+//--- create
+   if(!m_button49.Create(m_chart_id,m_name+" rectangle box ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button49.ColorBackground(clrNONE))
+      return(false);
+   if(!m_button49.Text(""))
+      return(false);
+   if(!m_button49.FontSize(fontSize - 2))
+      return(false);
+   if(!m_button49.Color(clrBlack))
+      return(false);
+   if(!m_button49.ColorBorder(colorshade))
+      return(false);
+   if(!Add(m_button49))
+      return(false);
+
+   m_button49.Deactivate();
+   m_button49.Disable();
+   m_button49.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton50(void)
+  {
+//--- coordinates
+   int x1 = 5;
+   int y1 = 235;
+   int x2 = dashWidth - 32;
+   int y2 = y1 + 90;
+//--- create
+   if(!m_button50.Create(m_chart_id,m_name+" rectangle box1 ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button50.ColorBackground(clrNONE))
+      return(false);
+   if(!m_button50.Text(""))
+      return(false);
+   if(!m_button50.FontSize(fontSize - 2))
+      return(false);
+   if(!m_button50.Color(clrBlack))
+      return(false);
+   if(!m_button50.ColorBorder(colorshade))
+      return(false);
+   if(!Add(m_button50))
+      return(false);
+
+   m_button50.ZOrder(-1);
+
+   m_button50.Deactivate();
+   m_button50.Disable();
+   m_button50.Locking(true);
+//--- succeed
+   return(true);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreateButton51(void)
+  {
+//--- coordinates
+   int x1 = 5;
+   int y1 = 375;
+   int x2 = dashWidth - 32;
+   int y2 = y1 + 85;
+//--- create
+   if(!m_button51.Create(m_chart_id,m_name+" rectangle box2 ",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!m_button51.ColorBackground(clrNONE))
+      return(false);
+   if(!m_button51.Text(""))
+      return(false);
+   if(!m_button51.FontSize(fontSize - 2))
+      return(false);
+   if(!m_button51.Color(clrBlack))
+      return(false);
+   if(!m_button51.ColorBorder(colorshade))
+      return(false);
+   if(!Add(m_button51))
+      return(false);
+
+   m_button51.Deactivate();
+
+   m_button51.Disable();
+   m_button51.Locking(true);
+
+//--- succeed
+   return(true);
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton1(void)
+  {
+   if(m_button1.Pressed())
+     {
+      m_button1.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton2(void)
+  {
+   if(m_button2.Pressed())
+     {
+      m_button2.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton3(void)
+  {
+   if(m_button3.Pressed())
+     {
+      m_button3.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton4(void)
+  {
+   if(m_button4.Pressed())
+     {
+      m_button4.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton5(void)
+  {
+   if(m_button5.Pressed())
+     {
+      m_button5.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton6(void)
+  {
+   if(m_button6.Pressed())
+     {
+      m_button6.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton7(void)
+  {
+   if(m_button7.Pressed())
+     {
+      m_button7.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton8(void)
+  {
+   if(m_button8.Pressed())
+     {
+      m_button8.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton9(void)
+  {
+   if(m_button9.Pressed())
+     {
+      m_button9.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton10(void)
+  {
+   if(m_button10.Pressed())
+     {
+      if(m_button10.Text() == "Auto ON")
+        {
+         m_button10.Text("Auto OFF");
+        }
+      else
+        {
+         m_button10.Text("Auto ON");
+        }
+      Sleep(3);
+      m_button10.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton11(void)
+  {
+   if(m_button11.Pressed())
+     {
+      m_button11.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton12(void)
+  {
+   if(m_button12.Pressed())
+     {
+      if(m_button12.Text() == "Auto ON")
+        {
+         m_button12.Text("Auto OFF");
+        }
+      else
+        {
+         m_button12.Text("Auto ON");
+        }
+      Sleep(3);
+      m_button12.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton13(void)
+  {
+   if(m_button13.Pressed())
+     {
+      m_button13.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton14(void)
+  {
+   if(m_button14.Pressed())
+     {
+      m_button14.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton15(void)
+  {
+   if(m_button15.Pressed())
+     {
+
+      Sleep(3);
+      m_button15.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton16(void)
+  {
+   if(m_button16.Pressed())
+     {
+      m_button16.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton17(void)
+  {
+   if(m_button17.Pressed())
+     {
+      m_button17.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton18(void)
+  {
+   if(m_button18.Pressed())
+     {
+      m_button18.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton19(void)
+  {
+   if(m_button19.Pressed())
+     {
+      m_button19.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton20(void)
+  {
+   if(m_button20.Pressed())
+     {
+      m_button20.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton21(void)
+  {
+   if(m_button21.Pressed())
+     {
+      if(m_button21.Text() == "Auto ON")
+        {
+         m_button21.Text("Auto OFF");
+        }
+      else
+        {
+         m_button21.Text("Auto ON");
+        }
+      m_button21.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton22(void)
+  {
+   if(m_button22.Pressed())
+     {
+
+
+      m_button22.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton23(void)
+  {
+   if(m_button23.Pressed())
+     {
+      if(m_button23.Text() == "Auto ON")
+        {
+         m_button23.Text("Auto OFF");
+        }
+      else
+        {
+         m_button23.Text("Auto ON");
+        }
+      m_button23.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton24(void)
+  {
+   if(m_button24.Pressed())
+     {
+      m_button24.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton25(void)
+  {
+   if(m_button25.Pressed())
+     {
+      if(m_button25.Text() == "Auto ON")
+        {
+         m_button25.Text("Auto OFF");
+        }
+      else
+        {
+         m_button25.Text("Auto ON");
+        }
+      m_button25.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton26(void)
+  {
+   if(m_button26.Pressed())
+     {
+      m_button26.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton27(void)
+  {
+   if(m_button27.Pressed())
+     {
+      m_button27.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton28(void)
+  {
+   if(m_button28.Pressed())
+     {
+      m_button28.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton29(void)
+  {
+   if(m_button29.Pressed())
+     {
+      m_button29.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton30(void)
+  {
+   if(m_button30.Pressed())
+     {
+      m_button30.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton31(void)
+  {
+   if(m_button31.Pressed())
+     {
+      m_button31.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton32(void)
+  {
+   if(m_button32.Pressed())
+     {
+      if(m_button32.Text() == "Auto ON")
+        {
+         m_button32.Text("Auto OFF");
+        }
+      else
+        {
+         m_button32.Text("Auto ON");
+        }
+      m_button32.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton33(void)
+  {
+   if(m_button33.Pressed())
+     {
+      m_button33.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton34(void)
+  {
+   if(m_button34.Pressed())
+     {
+      m_button34.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton35(void)
+  {
+   if(m_button35.Pressed())
+     {
+      Sleep(3);
+      m_button35.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton36(void)
+  {
+   if(m_button36.Pressed())
+     {
+      Sleep(3);
+      m_button36.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton37(void)
+  {
+   if(m_button37.Pressed())
+     {
+      Sleep(3);
+      m_button37.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton38(void)
+  {
+   if(m_button38.Pressed())
+     {
+      Sleep(3);
+      m_button38.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton39(void)
+  {
+   if(m_button39.Pressed())
+     {
+      Sleep(3);
+      m_button39.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton40(void)
+  {
+   if(m_button40.Pressed())
+     {
+      Sleep(3);
+      m_button40.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton41(void)
+  {
+   if(m_button41.Pressed())
+     {
+      m_button41.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton42(void)
+  {
+   if(m_button42.Pressed())
+     {
+      m_button42.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton43(void)
+  {
+   if(m_button43.Pressed())
+     {
+      m_button43.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton44(void)
+  {
+   if(m_button44.Pressed())
+     {
+      m_button44.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton45(void)
+  {
+   if(m_button45.Pressed())
+     {
+      m_button45.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton46(void)
+  {
+   if(m_button46.Pressed())
+     {
+      m_button46.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton47(void)
+  {
+   if(m_button47.Pressed())
+     {
+      m_button47.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton48(void)
+  {
+   if(m_button48.Pressed())
+     {
+      m_button48.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton49(void)
+  {
+   if(m_button49.Pressed())
+     {
+      m_button49.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton50(void)
+  {
+   if(m_button50.Pressed())
+     {
+      m_button50.Pressed(false);
+     }
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void CControlsDialog::OnClickButton51(void)
+  {
+   if(m_button51.Pressed())
+     {
+      m_button51.Pressed(false);
+     }
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool CControlsDialog::CreatePanel(void)
+  {
+//--- coordinates
+   int x1=0;
+   int y1=0;
+   int x2=dashWidth;
+   int y2=dashHeight;
+//--- create
+   if(!backgroundPanel.Create(0,ExtDialog.Name()+"backPanel",m_subwin,x1,y1,x2,y2))
+      return(false);
+   if(!backgroundPanel.ColorBackground(clrWhiteSmoke))
+      return(false);
+   if(!backgroundPanel.ColorBorder(00128))
+      return(false);
+   if(!ExtDialog.Add(backgroundPanel))
+      return(false);
+   ExtDialog.Minimized(false);
+
+
+   backgroundPanel.Alignment(WND_ALIGN_CLIENT,0,0,0,0);
+//--- succeed
+   return(true);
+  }
+
+CControlsDialog ExtDialog;
+CPanel   backgroundPanel;
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnChartEvent(const int id,
+                  const long &lparam,
+                  const double &dparam,
+                  const string &sparam)
+  {
+//---
+   ExtDialog.ChartEvent(id,lparam,dparam,sparam);
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ulong placeBuyTrade(string tradeComment,double lot)
+  {
+
+   double price  = SymbolInfoDouble(Symbol(),SYMBOL_ASK);
+   double buySl = 0,buyTp = 0;
+
+   if(trade.Buy(lot,Symbol(),price,buySl,buyTp,tradeComment))
+     {
+      Print(" Buy Trade Placed: ",trade.ResultOrder());
+      return trade.ResultOrder();
+     }
+   else
+     {
+      Print(" Error in placing Buy Trade : ",GetLastError());
+     }
+   return -1;
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ulong placeSellTrade(string tradeComment,double lot)
+  {
+
+   double price  = SymbolInfoDouble(Symbol(),SYMBOL_BID);
+   double sellSl = 0,sellTp = 0;
+
+   if(trade.Sell(lot,Symbol(),price,sellSl,sellTp,tradeComment))
+     {
+      Print(" Sell Trade Placed: ",trade.ResultOrder());
+      return trade.ResultOrder();
+     }
+   else
+     {
+      Print(" Error in placing Sell Trade : ",GetLastError());
+     }
+   return -1;
+  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ulong placeSellStopTrade(string tradeComment,double lot,double orderPrice)
+  {
+
+   if(trade.SellStop(lot,orderPrice,Symbol(),0,0))
+     {
+      Print(" Sell Stop Trade Placed: ",trade.ResultOrder());
+      return trade.ResultOrder();
+     }
+   else
+     {
+      Print(" Error in placing Sell Stop Trade : ",GetLastError());
+     }
+   return -1;
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+ulong placeBuyStopTrade(string tradeComment,double lot,double orderPrice)
+  {
+
+   if(trade.BuyStop(lot,orderPrice,Symbol(),0,0))
+     {
+      Print(" Buy Stop Trade Placed: ",trade.ResultOrder());
+      return trade.ResultOrder();
+     }
+   else
+     {
+      Print(" Error in placing Buy Stop Trade : ",GetLastError());
+     }
+   return -1;
+  }
+//+------------------------------------------------------------------+
