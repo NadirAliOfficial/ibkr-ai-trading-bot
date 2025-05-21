@@ -1,0 +1,34 @@
+{
+  "tickers": [
+    "SPY",
+    "QQQ",
+    "AAPL",
+    "TSLA"
+  ],
+  "allocation_per_trade": 0.05,
+  "rsi_window": 14,
+  "macd_fast": 12,
+  "macd_slow": 26,
+  "macd_signal": 9,
+  "vwap_window": 20,
+  "volume_spike_mult": 2.0000000000000004,
+  "tp_tiers": [
+    0.25,
+    0.75,
+    1.5
+  ],
+  "sl_pct": 0.1,
+  "delta_target": 0.5,
+  "time_filters": [
+    [
+      "09:40",
+      "10:00"
+    ],
+    [
+      "15:15",
+      "15:45"
+    ]
+  ],
+  "use_black_scholes": false,
+  "risk_free_rate": 0.02
+}

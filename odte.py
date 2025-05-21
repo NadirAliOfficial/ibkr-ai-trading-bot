@@ -1,152 +1,62 @@
-# milestone2_backtest_final.py
+import json, tkinter as tk
+from tkinter import ttk, messagebox
 
-import os
-import time
-import pandas as pd
-import numpy as np
-from ib_insync import IB, Stock, util
-import xgboost as xgb
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-import joblib
+CONFIG_FILE = 'strategy_config.json'
+# load or default
+try:
+    with open(CONFIG_FILE) as f: cfg = json.load(f)
+except:
+    cfg = {}
 
-# ─── Configuration ─────────────────────────────────────────────────────────────
-TICKERS         = ['SPY',  'AAPL']
-INITIAL_CAP     = 100_000.0
-ALLOC_PER_TRADE = 0.05
-DELTA           = 0.5
-WINDOW          = 20
-MODEL_FILE      = 'xgb_odte_model.pkl'
-TP_TIERS        = [1.25, 1.75, 2.50]   # +25%, +75%, +150%
-SL_THRESHOLD    = 0.20                # 20% stop-loss
+root = tk.Tk()
+root.title("0DTE Strategy Config")
+frm = ttk.Frame(root, padding=20); frm.pack()
 
-# ─── Connect ───────────────────────────────────────────────────────────────────
-ib = IB()
-ib.connect('127.0.0.1', 7497, clientId=2)
+# helper to save
+def save():
+    with open(CONFIG_FILE,'w') as f: json.dump(cfg,f,indent=2)
+    messagebox.showinfo("Saved","Config saved."); root.destroy()
 
-def fetch_data(symbol, duration='14 D'):
-    contract = Stock(symbol, 'SMART', 'USD', primaryExchange='ARCA')
-    ib.qualifyContracts(contract)
-    for _ in range(3):
-        bars = ib.reqHistoricalData(contract, '', duration, '1 min', 'TRADES', True)
-        if bars:
-            return util.df(bars).set_index('date')
-        time.sleep(2)
-    raise RuntimeError(f"Failed fetching {symbol}")
+# Allocation
+ttk.Label(frm,text="Allocation %").grid(row=0,column=0,sticky="w")
+alloc = tk.DoubleVar(value=cfg.get("allocation_per_trade",0.05)*100)
+ttk.Scale(frm,from_=1,to=20,variable=alloc,orient="horizontal").grid(row=0,column=1)
 
-def compute_indicators(df):
-    df['vwap']    = (df['close']*df['volume']).rolling(WINDOW).sum() / df['volume'].rolling(WINDOW).sum()
-    d            = df['close'].diff()
-    gain         = d.clip(lower=0)
-    loss         = -d.clip(upper=0)
-    avg_gain     = gain.rolling(14).mean()
-    avg_loss     = loss.rolling(14).mean()
-    rs           = avg_gain/(avg_loss+1e-5)
-    df['rsi']    = 100-(100/(1+rs))
-    e12          = df['close'].ewm(span=12,adjust=False).mean()
-    e26          = df['close'].ewm(span=26,adjust=False).mean()
-    df['macd']   = e12-e26
-    df['signal'] = df['macd'].ewm(span=9,adjust=False).mean()
-    df['avg_vol']= df['volume'].rolling(WINDOW).mean()
-    return df.dropna()
+# VWAP window
+ttk.Label(frm,text="VWAP Window").grid(row=1,column=0,sticky="w")
+vwap = tk.IntVar(value=cfg.get("vwap_window",20))
+ttk.Spinbox(frm,from_=5,to=60,textvariable=vwap,width=5).grid(row=1,column=1)
 
-# ─── Load or train XGBoost ───────────────────────────────────────────────────
-if os.path.exists(MODEL_FILE):
-    model = joblib.load(MODEL_FILE)
-else:
-    train_df = fetch_data('SPY', '90 D')
-    train_df = compute_indicators(train_df)
-    train_df['future'] = train_df['close'].shift(-10)
-    train_df['label']  = (train_df['future'] > train_df['close']).astype(int)
-    feats = train_df[['vwap','rsi','macd','signal','avg_vol']]
-    labels= train_df['label']
-    Xtr,Xte,ytr,yte = train_test_split(feats,labels,test_size=0.2,shuffle=False)
-    model = xgb.XGBClassifier(n_estimators=100, max_depth=3,
-                              use_label_encoder=False, eval_metric='logloss')
-    model.fit(Xtr,ytr)
-    print("XGB Acc:", accuracy_score(yte, model.predict(Xte)))
-    joblib.dump(model, MODEL_FILE)
+# RSI window
+ttk.Label(frm,text="RSI Window").grid(row=2,column=0,sticky="w")
+rsi = tk.IntVar(value=cfg.get("rsi_window",14))
+ttk.Spinbox(frm,from_=5,to=30,textvariable=rsi,width=5).grid(row=2,column=1)
 
-capital    = INITIAL_CAP
-tickerPL   = {t: 0.0 for t in TICKERS}
-all_logs   = []
+# Profit tiers
+ttk.Label(frm,text="TP Tiers (%)").grid(row=3,column=0,sticky="w")
+tiers = tk.StringVar(value=",".join(str(int(t*100)) for t in cfg.get("tp_tiers",[25,75,150])))
+ttk.Entry(frm,textvariable=tiers).grid(row=3,column=1)
 
-for sym in TICKERS:
-    print(f"\n🔁 Backtesting {sym}")
-    df = fetch_data(sym, '14 D')
-    df = compute_indicators(df)
+# Stop-loss %
+ttk.Label(frm,text="Stop-Loss %").grid(row=4,column=0,sticky="w")
+sl = tk.DoubleVar(value=cfg.get("sl_pct",0.20)*100)
+ttk.Scale(frm,from_=5,to=50,variable=sl,orient="horizontal").grid(row=4,column=1)
 
-    position  = None
-    targets   = []
-    ti        = 0
+# Black-Scholes toggle
+bs = tk.BooleanVar(value=cfg.get("use_black_scholes",True))
+ttk.Checkbutton(frm,text="Use Black-Scholes",variable=bs).grid(row=5,column=0,columnspan=2)
 
-    for i in range(WINDOW, len(df)):
-        row = df.iloc[i]
-        p   = row['close']
-        t   = row.name
+# Save button
+ttk.Button(frm,text="Save & Close",command=lambda: [
+    cfg.update({
+      "allocation_per_trade": alloc.get()/100,
+      "vwap_window":          vwap.get(),
+      "rsi_window":           rsi.get(),
+      "tp_tiers":             [int(x)/100 for x in tiers.get().split(",")],
+      "sl_pct":               sl.get()/100,
+      "use_black_scholes":    bs.get()
+    }),
+    save()
+]).grid(row=6,column=0,columnspan=2,pady=10)
 
-        # Fakeout
-        fake = (p>row['vwap'] and df.iloc[i-1]['close']>p and row['volume']>2*row['avg_vol'])
-
-        base = (p>row['vwap'] and 30<row['rsi']<70 and
-                row['macd']>row['signal'] and row['volume']>1.5*row['avg_vol'] and not fake)
-        feat = np.array([[row['vwap'],row['rsi'],row['macd'],row['signal'],row['avg_vol']]])
-        aiok = model.predict(feat)[0]==1
-
-        if position is None and base and aiok:
-            prem     = p*0.02
-            cnt      = int((capital*ALLOC_PER_TRADE)/(prem*100))
-            position = {'entry_t':t,'entry_p':p,'cnt':cnt}
-            targets  = [p*x for x in TP_TIERS]
-            ti       = 0
-            print(f"[ENTRY]  {t} {sym} @ {p:.2f} → {cnt} contracts")
-
-        elif position:
-            move   = p-position['entry_p']
-            pnl    = move*DELTA*100*position['cnt']
-
-            # Tier exits
-            if ti<len(targets) and p>=targets[ti]:
-                slice_qty = position['cnt']//len(targets)
-                gain = (targets[ti]-position['entry_p'])*DELTA*100*slice_qty
-                capital += gain
-                tickerPL[sym]+= gain
-                all_logs.append({'sym':sym,'entry':position['entry_t'],
-                                 'exit':t,'pnl':gain,'type':f'Tier{ti+1}'})
-                print(f"[TIER{ti+1}] {t} {sym} PnL ${gain:.2f}")
-                ti+=1
-                if ti>=len(targets):
-                    position=None
-
-            # Stop-loss
-            elif pnl<=-INITIAL_CAP*ALLOC_PER_TRADE*SL_THRESHOLD:
-                capital += pnl
-                tickerPL[sym]+= pnl
-                all_logs.append({'sym':sym,'entry':position['entry_t'],
-                                 'exit':t,'pnl':pnl,'type':'SL'})
-                print(f"[SL]     {t} {sym} PnL ${pnl:.2f}")
-                position=None
-
-            # Smart exit
-            elif (row['rsi']<df.iloc[i-1]['rsi'] and
-                  row['macd']<df.iloc[i-1]['macd'] and
-                  row['volume']<row['avg_vol']):
-                capital += pnl
-                tickerPL[sym]+= pnl
-                all_logs.append({'sym':sym,'entry':position['entry_t'],
-                                 'exit':t,'pnl':pnl,'type':'SmartExit'})
-                print(f"[SmartExit] {t} {sym} PnL ${pnl:.2f}")
-                position=None
-
-# ─── Reporting ────────────────────────────────────────────────────────────────
-print("\n📈 Ticker PnL Breakdown:")
-for s,pl in tickerPL.items():
-    print(f"  {s}: ${pl:.2f}")
-total_profit = capital - INITIAL_CAP
-print(f"\n💰 Total Profit: ${total_profit:.2f}")
-print(f"✅ Final Capital: ${capital:.2f}")
-
-pd.DataFrame(all_logs).to_csv('milestone2_trade_log.csv', index=False)
-print("📁 Logs → milestone2_trade_log.csv")
-
-ib.disconnect()
+root.mainloop()
