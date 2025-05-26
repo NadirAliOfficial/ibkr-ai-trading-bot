@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score
 import joblib
 
 # ─── Configuration ─────────────────────────────────────────────────────────────
-TICKERS         = ['SPY', 'QQQ', 'AAPL', 'TSLA']
+TICKERS         = [ 'AAPL']
 INITIAL_CAP     = 100_000.00
 ALLOC_PER_TRADE = 0.05
 DELTA           = 0.5
