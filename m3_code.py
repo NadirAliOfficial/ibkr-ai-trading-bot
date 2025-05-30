@@ -67,19 +67,25 @@ def run_backtest():
         # connect to IBKR
         ib = IB()
         try:
-            ib.connect('127.0.0.1', 7497, clientId=2)
+            
+            ib.connect('127.0.0.1', 7497, clientId=2, readonly=True)
+            ib.reqMarketDataType(1)  # 1 = real-time data
+            time.sleep(1)
+
         except Exception as e:
             log(f"❌ IB connect error: {e}")
             return
 
         # helper: fetch 1-min bars, with retry
         def fetch_data(sym, duration='14 D'):
-            contract = Stock(sym, 'SMART', 'USD', primaryExchange='ARCA')
+            contract = Stock(sym, 'SMART', 'USD')
             ib.qualifyContracts(contract)
             for _ in range(3):
+
                 bars = ib.reqHistoricalData(
-                    contract, '', duration, '1 min', 'TRADES', True
-                )
+                        contract, '', duration, '1 min', 'TRADES', useRTH=False
+                    )
+
                 if bars:
                     df = util.df(bars).set_index('date')
                     if not df.empty:
@@ -102,8 +108,9 @@ def run_backtest():
         # helper: real option premium
         def get_real_option_premium(sym, expiry, offset, right='C'):
             # get underlying price
-            stk = Stock(sym, 'SMART', 'USD', primaryExchange='ARCA')
+            stk = Stock(sym, 'SMART', 'USD')
             ib.qualifyContracts(stk)
+            ib.sleep(1.5)  # let IBKR warm up after contract qualification
             tck = ib.reqMktData(stk, '', False, False)
             time.sleep(1)
             price = tck.last
@@ -115,8 +122,9 @@ def run_backtest():
             opt = Option(sym, expiry, strike, right, 'SMART')
             ib.qualifyContracts(opt)
             bars = ib.reqHistoricalData(
-                opt, '', '1 D', '1 min', 'MIDPOINT', True
+                opt, '', '1 D', '1 min', 'MIDPOINT', useRTH=False
             )
+
             if not bars:
                 return None
             df_opt = util.df(bars)
