@@ -67,7 +67,7 @@ def run_backtest():
         # connect to IBKR
         ib = IB()
         try:
-            
+
             ib.connect('127.0.0.1', 7497, clientId=2, readonly=True)
             ib.reqMarketDataType(1)  # 1 = real-time data
             time.sleep(1)
