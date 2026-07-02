@@ -89,11 +89,11 @@ else:
     df_train = compute_indicators(df_train)
     df_train['future'] = df_train['close'].shift(-10)
     df_train['label']  = (df_train['future'] > df_train['close']).astype(int)
-    
+
     features = df_train[['vwap', 'rsi', 'macd', 'signal', 'avg_vol']]
     labels   = df_train['label']
     X_tr, X_te, y_tr, y_te = train_test_split(features, labels, test_size=0.2, shuffle=False)
-    
+
     model = xgb.XGBClassifier(
         n_estimators=100,
         max_depth=3,
